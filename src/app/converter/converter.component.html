@@ -1,0 +1,64 @@
+<html>
+  <body>
+  <header>
+    <nav>
+      <button (click)="onLogout()">Logout</button>
+    </nav>
+  </header>
+    <div class="blue-background"></div>
+    <div class="white-background"></div>
+    <div class="center-box">
+      <div class="container">
+        <h1>How much is it?</h1>
+        <form #formGroup="ngForm" (ngSubmit)="onSubmit(formGroup)">
+          <div class="fields">
+            <div class="field">
+              <label>Amount</label>
+              <input type="number" name="amount" [(ngModel)]="amount">
+            </div>
+            <div class="field">
+              <label>From</label>
+              <select name="from" [(ngModel)]="from_currency">
+                <option *ngFor="let currency of options$ | async" [value]="currency.MonneyCode">{{currency.Name}}</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>To</label>
+              <select name="to" [(ngModel)]="to_currency">
+                <option *ngFor="let currency of options$ | async" [value]="currency.MonneyCode">{{currency.Name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="button">
+            <button>Convert</button>
+          </div>
+        </form>
+        <div class="answer">
+          <input *ngIf="result!=undefined" disabled [value]="result + ' '+ to_currency">
+        </div>
+      </div>
+    </div>
+    <h2>History</h2>
+    <div class="histories">
+      <div *ngFor="let instance of tab" class="history">
+        <div class="fields">
+          <div class="field">
+            <label>Amount</label>
+            <input type="number" name="amount" disabled [value]="instance">
+          </div>
+          <div class="field">
+            <label>From</label>
+            <input type="number" name="amount" disabled [value]="instance">
+          </div>
+          <div class="field">
+            <label>To</label>
+            <input type="number" name="amount" disabled [value]="instance">
+          </div>
+        </div>
+        <div class="answer">
+          <input disabled [value]="'Badaboum'">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
